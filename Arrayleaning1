@@ -1,0 +1,53 @@
+
+
+class  ArrayJinzhi2
+{
+	public static void main(String[] args) 
+	{
+		//toBin(-20);
+		toOct(-10);
+		//toHex(60);
+
+	}
+	// 十进制转换成二进制
+	public static void toBin(int num)
+	{
+		trans( num, 1, 1);
+	}
+	// 十进制转换成八进制
+	public static void toOct(int num)
+	{
+		trans( num, 7, 3 );
+	}
+	// 十进制转换成十六进制
+	public static void toHex(int num)
+	{
+		trans( num, 15, 4);
+	
+	}
+	//相同功能抽取，并封装
+	public static void trans(int num, int base, int offset)
+	{
+		char[] chs={'0','1','2','3',
+					'4','5','6','7',
+					'8','9','A','B',
+					'C','D','E','F'};//定义表
+		char[] arr = new char[32];//定义储存容器--数组
+		int pos = arr.length;		 //控制容器的工具--指针
+		
+		while( num != 0 ){			 //循环条件，当num中有效位提完以后，停止循环，减少不必要的循环
+			int temp = num&base;	 //临时变量，存储二进制最后四位数在表内对应的角标
+			arr[--pos] = chs[temp];//将表数组的角标对应的元素存入容器数组
+			num = num>>>offset;		 //将二进制的数后移四位，准备提取下一个四位的内容
+		}
+		printArr(arr,pos);
+	
+	}
+	//打印数组
+	public static void printArr(char[] arr,int i)
+	{
+		for( int x=i; x<arr.length; x++ ){
+			System.out.print(arr[x]);
+		}
+	}
+}
